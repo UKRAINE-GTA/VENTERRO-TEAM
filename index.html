@@ -1,1 +1,301 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Venterro Links</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --background-color: #000033;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Audiowide', cursive;
+            background: var(--background-color);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .space-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(45deg);
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: starTwinkle 1s infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
+            animation: shootingStar 2s linear infinite;
+        }
+
+        @keyframes shootingStar {
+            0% { transform: translateX(-100px) translateY(100px); opacity: 1; }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(calc(-100vh - 100px)); opacity: 0; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 0 50px var(--primary-color), 0 0 100px var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            animation: containerFloat 10s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            25% { transform: translateY(-20px) rotateX(5deg) rotateY(5deg); }
+            50% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            75% { transform: translateY(20px) rotateX(-5deg) rotateY(-5deg); }
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: block;
+            border: 6px solid var(--primary-color);
+            box-shadow: 0 0 30px var(--primary-color), 0 0 50px var(--secondary-color), 0 0 70px var(--primary-color);
+            animation: avatarPulse 2s infinite, avatarRotate 10s linear infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--primary-color), transparent 30%);
+            animation: avatarSpin 4s linear infinite;
+        }
+
+        @keyframes avatarPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes avatarRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes avatarSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .link {
+            display: block;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.8);
+        }
+
+        .link::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .link:hover::before {
+            left: 100%;
+        }
+
+        .link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .link:hover::after {
+            transform: translateX(100%);
+        }
+
+        .neon {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .neon div {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: neon 5s infinite;
+        }
+
+        @keyframes neon {
+            0% { opacity: 0; transform: scale(0.1); }
+            50% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-wrapper">
+        <div class="stars"></div>
+    </div>
+    <div class="container">
+        <img class="avatar" src="https://i.imgur.com/9SktKw7.png" alt="Avatar">
+
+        <a href="https://ukraine-gta.com.ua/links/venterro" class="link" target="_blank"><i class="fas fa-link"></i>Ukraine GTA</a>
+      <a href="https://ukraine-gta5.com.ua/" class="link" target="_blank"><i class="fas fa-link"></i>Ukraine GTA 5</a>
+        <a href="https://www.youtube.com/@Venterroo/featured" class="link" target="_blank"><i class="fa-brands fa-youtube"></i>YouTube</a>
+        <a href="https://discord.gg/ZVjUpf2E6C" class="link" target="_blank"><i class="fa-brands fa-discord"></i>Discord</a>
+        <a href="https://t.me/+yha6l-K9GY00YzQy" class="link" target="_blank"><i class="fa-brands fa-telegram"></i>Telegram</a>
+        <a href="https://www.instagram.com/eduard_zubkevych/" class="link" target="_blank"><i class="fa-brands fa-instagram"></i>Instagram</a>
+        <div class="neon"></div>
+    </div>
+
+    <script>
+        function createStars() {
+            const stars = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                stars.appendChild(star);
+            }
+        }
+
+        function createShootingStars() {
+            const space = document.querySelector('.space-wrapper');
+            setInterval(() => {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.left = `${Math.random() * 100}%`;
+                shootingStar.style.top = `${Math.random() * 100}%`;
+                space.appendChild(shootingStar);
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, 2000);
+            }, 3000);
+        }
+
+        function createNeonEffect() {
+            const neon = document.querySelector('.neon');
+            for (let i = 0; i < 10; i++) {
+                const div = document.createElement('div');
+                div.style.width = `${Math.random() * 100 + 50}px`;
+                div.style.height = div.style.width;
+                div.style.left = `${Math.random() * 100}%`;
+                div.style.top = `${Math.random() * 100}%`;
+                div.style.animationDelay = `${Math.random() * 5}s`;
+                neon.appendChild(div);
+            }
+        }
+
+        createStars();
+        createShootingStars();
+        createNeonEffect();
+
+        document.querySelectorAll('.link').forEach(link => {
+            link.addEventListener('mouseover', () => {
+                link.style.background = `linear-gradient(90deg, 
+                    hsl(${Math.random() * 360}, 100%, 50%), 
+                    hsl(${Math.random() * 360}, 100%, 50%))`;
+            });
+            link.addEventListener('mouseout', () => {
+                link.style.background = 'linear-gradient(90deg, var(--primary-color), var(--secondary-color))';
+            });
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const container = document.querySelector('.container');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+    </script>
+</body>
+</html>
